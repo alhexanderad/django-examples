@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block scripts %}
+  <script src="{% static '' %}" defer></script>
+{% endblock scripts %}
+
+
+{% block title %}
+  {{title}}
+{% endblock title %}
+
+
+{% block content %}
+  <h1 class="text-center">Lista de Horas</h1>
+  <br>
+  
+  {% for s in obj %}
+  <p>
+    {{s.id_app}} - {{s.name}} - {{s.surname}} - {{s.created_at}}
+  </p>
+  {% endfor %}
+
+  <h2>Lista de entrada y Salida</h2>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Nombres</th>
+        <th scope="col">Apellidos</th>
+        <th scope="col">Hora de Entrada</th>
+        <th scope="col">Hora de Salida</th>
+        <th scope="col">Tiempo</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for a in ass %}
+      <tr>
+        <td>{{a.apprentice.id_app}}</td>
+        <td>{{a}}</td>
+        <td>{{a.apprentice.surname}}</td>
+        <td>{{a.entry_at}}</td>
+        <td>{{a.exit_at}}</td>
+        <td>{{tiempo}}</td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+
+{% endblock content %}
