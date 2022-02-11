@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'student/clock.css' %}">
+{% endblock css %}
+  
+
+{% block scripts %}
+  <script src="{% static 'student/clock.js' %}" defer></script>
+{% endblock scripts %}
+
+
+{% block title %}
+  {{title}}
+{% endblock title %}
+
+
+{% block content %}
+  <h1 class="text-center">{{title}}</h1>
+  <br>
+  <p>{{time}}</p>
+  <div class="reloj" id="relojnumerico" onload="cargarReloj()">
+  </div>
+
+{% endblock content %}

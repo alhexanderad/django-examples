@@ -9,9 +9,10 @@
 
     <!-- Custom css -->
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    {% block css %}
+    {% endblock css %}
 
-
-    <script src="{% static 'js/function.js' %}" defer></script>
+    <script src="{% static 'js/main.js' %}" defer></script>
     {% block scripts %}
     {% endblock scripts %}
       

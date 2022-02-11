@@ -1,3 +1,4 @@
+import time
 from cgi import print_environ
 from multiprocessing import context
 from django.shortcuts import render
@@ -27,3 +28,13 @@ def list_apprentice(request):
     'tiempo': tiempo,
   }
   return render(request, 'student/list.html', context)
+
+def save_assitance(request):
+  now = time.strftime("%H:%M:%S")
+  print(now)
+  context ={
+    'time' : now,
+    'title': 'Ingresar codigo de socio',
+  }
+  pass
+  return render(request, 'student/save.html', context)
