@@ -14,8 +14,10 @@ class Apprentice(models.Model):
 class Assistance(models.Model):
   id_ass = models.AutoField(primary_key=True)
   apprentice = models.ForeignKey(Apprentice, verbose_name=_("Aprendis"), on_delete=models.CASCADE)
-  entry_at = models.DateTimeField(_("Hora de Ingreso"), blank=True,null=True)
-  exit_at = models.DateTimeField(_("Hora de Salida"), blank=True,null=True)
+  entry_boolean = models.BooleanField(default=False)
+  entry_at = models.DateTimeField(_("Hora de Ingreso"), auto_now_add=True)
+  exit_boolean = models.BooleanField(default=False)
+  exit_at = models.DateTimeField(_("Hora de Salida"), auto_now=True)
   
   def __str__(self):
     return str(self.apprentice)
