@@ -32,6 +32,7 @@
         <th scope="col">Hora de Entrada</th>
         <th scope="col">Hora de Salida</th>
         <th scope="col">Tiempo</th>
+        <th scope="col">Proceso</th>
       </tr>
     </thead>
     <tbody>
@@ -40,9 +41,10 @@
         <td>{{a.apprentice.id_app}}</td>
         <td>{{a}}</td>
         <td>{{a.apprentice.surname}}</td>
-        <td>{{a.entry_at}}</td>
-        <td>{{a.exit_at}}</td>
+        <td>{{a.entry_boolean}}</td>
+        <td>{{a.exit_boolean}}</td>
         <td>{{tiempo}}</td>
+        <td><button type="button" class="btn btn-warning">Salida</button></td>
       </tr>
     {% endfor %}
     </tbody>
