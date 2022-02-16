@@ -38,7 +38,7 @@
       </tr>
     </thead>
     <tbody>
-    {% for a, t in asst_time %}
+    {% for a, d in asst_time %}
       <tr>
           <td>{{a.id_ass}}</td>
           <td>{{a.apprentice.id_app}}</td>
@@ -48,7 +48,7 @@
           <td>{{a.entry_at|time:"H:i"}}</td>
           <td>{{a.exit_at|date}}</td>
           <td>{{a.exit_at|time:"H:i"}}</td>
-          <td>{{t}}</td>
+          <td>{{ d }}</td>
           <td><button type="button" class="btn btn-danger">Imprimir</button></td>
       </tr>
     {% endfor %}

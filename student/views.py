@@ -110,24 +110,23 @@ def summary_assitance(request,pk,tm):
 
 def record_assitance(request):
 
-
   asst = Assistance.objects.filter(entry_boolean=True, exit_boolean=True)
-  print(asst)
   
-  time_total =[]
+  
+  days_times_total =[]
   for n in asst:
     app_1 = Assistance.objects.get(pk=n.id_ass)
-
-    time_entry = app_1.entry_at.strftime('%H:%M')
-    time_exit = app_1.exit_at.strftime('%H:%M')
-
-    formato = '%H:%M'
-    tiempo = datetime.strptime(time_exit, formato) - datetime.strptime(time_entry, formato)
-
-    time_total.append(tiempo)
     
-  print(time_total[5])
-  asst_time = zip(asst, time_total)
+    day_time_entry = app_1.entry_at.strftime('%y%m%d %H:%M:%S')
+    day_time_exit = app_1.exit_at.strftime('%y%m%d %H:%M:%S')
+
+    formato = '%y%m%d %H:%M:%S'
+    day_time = datetime.strptime(day_time_exit, formato) - datetime.strptime(day_time_entry, formato)
+    
+    days_times_total.append(day_time)
+    
+
+  asst_time = zip(asst,days_times_total)
   context ={
     'title': "Historial",
     'asst_time' : asst_time,
