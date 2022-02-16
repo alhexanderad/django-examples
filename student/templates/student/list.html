@@ -45,7 +45,7 @@
         <td>{{a.entry_at|time:"H:i"}}</td>
         <td>--:--</td>
         <td>{{tiempo}}</td>
-        <td><button type="button" class="btn btn-warning">Salida</button></td>
+        <td><button type="submit" class="btn btn-warning" onclick="window.location='{% url 'student:summary_assitance' a.apprentice.id_app a.entry_at%}'">Salida</button></td>
         {% endif %}
       </tr>
     {% endfor %}

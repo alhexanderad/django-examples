@@ -1,3 +1,4 @@
+from importlib.metadata import entry_points
 from typing import Any
 from django.urls import reverse
 from django.utils import timezone
@@ -8,41 +9,6 @@ from datetime import datetime
 from student.forms import AssistanceForm
 from datetime import datetime, timedelta
 import time
-
-def list_apprentice(request):
-  obj = Apprentice.objects.all()
-  ass = Assistance.objects.all()
-  
-  app_1 = Assistance.objects.get(pk=2)
-  
-  print(app_1.entry_at)
-  
-  time_entry = app_1.entry_at.strftime('%H:%M')
-  time_exit = app_1.exit_at.strftime('%H:%M')
-  print("Entrada:", time_entry)
-  print ("Salida: ",time_exit)
-  formato = '%H:%M'
-  tiempo = datetime.strptime(time_exit, formato) - datetime.strptime(time_entry, formato)
-  #resultado = time_exit - time_entry
-
-  context ={
-    'title': "Lista",
-    'obj': obj,
-    'ass' : ass,
-    'tiempo': tiempo,
-  }
-  return render(request, 'student/list.html', context)
-
-def record_assitance(request):
-  obj = Apprentice.objects.all()
-  ass = Assistance.objects.all()
-  context ={
-    'title': "Historial",
-    'obj': obj,
-    'ass' : ass,
-
-  }
-  return render(request, 'student/record.html', context)
 
 def get_into(request):
 
@@ -103,20 +69,67 @@ def get_into(request):
 
   return render(request, 'student/get_into.html', context)
 
-def summary_assitance(request,pk):
-#Una persona cuenta con un DNI, debe ser registrado su ingreso y salida.
 
+def list_apprentice(request):
+  obj = Apprentice.objects.all()
+  ass = Assistance.objects.all()
+  
+  app_1 = Assistance.objects.get(pk=2)
+  
+  print(app_1.entry_at)
+  
+  time_entry = app_1.entry_at.strftime('%H:%M')
+  time_exit = app_1.exit_at.strftime('%H:%M')
+  print("Entrada:", time_entry)
+  print ("Salida: ",time_exit)
+  formato = '%H:%M'
+  tiempo = datetime.strptime(time_exit, formato) - datetime.strptime(time_entry, formato)
+  #resultado = time_exit - time_entry
+  context ={
+    'title': "Lista",
+    'obj': obj,
+    'ass' : ass,
+    'tiempo': tiempo,
+  }
+  return render(request, 'student/list.html', context)
+
+
+def summary_assitance(request,pk,tm):
+#Una persona cuenta con un DNI, debe ser registrado su ingreso y salida.
 #Se realiza la busqueda la ultima vez que ingreso y que todavia no se registro su salida  
-  test = Assistance.objects.filter(apprentice__id_app=pk, exit_boolean=False).last()
-  print(test.id_ass)
-  ass_id = Assistance.objects.get(pk=test.id_ass)
+#Se tiene la busqueda pk de aprentice la entry_at
+  app = Assistance.objects.filter(apprentice__id_app=pk,entry_at=tm,exit_boolean=False)
+
+  ass_id = Assistance.objects.get(pk=app[0].id_ass)
   print(ass_id)
   context ={
     'ass_id':ass_id,
     'title': 'Resumen',
-    'test':test,
     }
   return render(request, 'student/summary.html', context)
 
+def record_assitance(request):
 
 
+  asst = Assistance.objects.filter(entry_boolean=True, exit_boolean=True)
+  print(asst)
+  
+  time_total =[]
+  for n in asst:
+    app_1 = Assistance.objects.get(pk=n.id_ass)
+
+    time_entry = app_1.entry_at.strftime('%H:%M')
+    time_exit = app_1.exit_at.strftime('%H:%M')
+
+    formato = '%H:%M'
+    tiempo = datetime.strptime(time_exit, formato) - datetime.strptime(time_entry, formato)
+
+    time_total.append(tiempo)
+    
+  print(time_total[5])
+  asst_time = zip(asst, time_total)
+  context ={
+    'title': "Historial",
+    'asst_time' : asst_time,
+  }
+  return render(request, 'student/record.html', context)

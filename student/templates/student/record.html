@@ -26,7 +26,8 @@
   <table class="table table-bordered">
     <thead>
       <tr>
-        <th scope="col">ID</th>
+        <th scope="col">#</th>
+        <th scope="col">id_persona</th>
         <th scope="col">Nombres</th>
         <th scope="col">Apellidos</th>
         <th scope="col">Fecha</th>
@@ -37,18 +38,18 @@
       </tr>
     </thead>
     <tbody>
-    {% for a in ass %}
+    {% for a, t in asst_time %}
       <tr>
-        {% if a.exit_boolean %}
+          <td>{{a.id_ass}}</td>
           <td>{{a.apprentice.id_app}}</td>
           <td>{{a}}</td>
           <td>{{a.apprentice.surname}}</td>
           <td>{{a.entry_at|date}}</td>
           <td>{{a.entry_at|time:"H:i"}}</td>
+          <td>{{a.exit_at|date}}</td>
           <td>{{a.exit_at|time:"H:i"}}</td>
-          <td>{{tiempo}}</td>
+          <td>{{t}}</td>
           <td><button type="button" class="btn btn-danger">Imprimir</button></td>
-        {% endif %}
       </tr>
     {% endfor %}
     </tbody>
