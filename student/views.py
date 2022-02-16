@@ -1,4 +1,3 @@
-import time
 from django.urls import reverse
 from django.utils import timezone
 from django.http import HttpResponseRedirect, HttpResponse
@@ -32,6 +31,17 @@ def list_apprentice(request):
     'tiempo': tiempo,
   }
   return render(request, 'student/list.html', context)
+
+def record_assitance(request):
+  obj = Apprentice.objects.all()
+  ass = Assistance.objects.all()
+  context ={
+    'title': "Historial",
+    'obj': obj,
+    'ass' : ass,
+
+  }
+  return render(request, 'student/record.html', context)
 
 def get_into(request):
 

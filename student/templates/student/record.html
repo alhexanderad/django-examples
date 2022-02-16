@@ -21,7 +21,7 @@
     {{s.id_app}} - {{s.name}} - {{s.surname}} - {{s.created_at}} -{{s.updated_at}}
   </p>
   {% endfor %}
-
+{{time}}
   <h2>Lista de entrada y Salida</h2>
   <table class="table table-bordered">
     <thead>
@@ -29,6 +29,7 @@
         <th scope="col">ID</th>
         <th scope="col">Nombres</th>
         <th scope="col">Apellidos</th>
+        <th scope="col">Fecha</th>
         <th scope="col">Hora de Entrada</th>
         <th scope="col">Hora de Salida</th>
         <th scope="col">Tiempo</th>
@@ -38,14 +39,15 @@
     <tbody>
     {% for a in ass %}
       <tr>
-        {% if a.exit_boolean == False %}
-        <td>{{a.apprentice.id_app}}</td>
-        <td>{{a}}</td>
-        <td>{{a.apprentice.surname}}</td>
-        <td>{{a.entry_at|time:"H:i"}}</td>
-        <td>--:--</td>
-        <td>{{tiempo}}</td>
-        <td><button type="button" class="btn btn-warning">Salida</button></td>
+        {% if a.exit_boolean %}
+          <td>{{a.apprentice.id_app}}</td>
+          <td>{{a}}</td>
+          <td>{{a.apprentice.surname}}</td>
+          <td>{{a.entry_at|date}}</td>
+          <td>{{a.entry_at|time:"H:i"}}</td>
+          <td>{{a.exit_at|time:"H:i"}}</td>
+          <td>{{tiempo}}</td>
+          <td><button type="button" class="btn btn-danger">Imprimir</button></td>
         {% endif %}
       </tr>
     {% endfor %}
