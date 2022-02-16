@@ -30,8 +30,9 @@
         <th scope="col">id_persona</th>
         <th scope="col">Nombres</th>
         <th scope="col">Apellidos</th>
-        <th scope="col">Fecha</th>
+        <th scope="col">Fecha Entrada</th>
         <th scope="col">Hora de Entrada</th>
+        <th scope="col">Fecha de Salida</th>
         <th scope="col">Hora de Salida</th>
         <th scope="col">Tiempo</th>
         <th scope="col">Proceso</th>
@@ -49,7 +50,7 @@
           <td>{{a.exit_at|date}}</td>
           <td>{{a.exit_at|time:"H:i"}}</td>
           <td>{{ d }}</td>
-          <td><button type="button" class="btn btn-danger">Imprimir</button></td>
+          <td><button type="button" class="btn btn-danger">Imprimir</button> <button type="button" class="btn btn-info">Actualizar</button></td>
       </tr>
     {% endfor %}
     </tbody>
