@@ -20,10 +20,16 @@
 {% block content %}
   <h1 class="text-center">{{title}}</h1>
   <br>
-  <p>{{ass_id.apprentice.name}}</p>
-  <p>{{ass_id.entry_at}}</p>
-  <p>{{ass_id.entry_boolean}}</p>
-  <p>{{ass_id.exit_boolean}}</p>
+  <form action="" method="POST">
+    {% csrf_token %}
+    <p name="id_asst">{{ass_id.id_ass}}</p>
+    <p>{{ass_id.apprentice.name}}</p>
+    <p>{{ass_id.entry_at}}</p>
+    <p>{{ass_id.entry_boolean}}</p>
+    <p>{{ass_id.exit_boolean}}</p>
+    <button type="submit" class="btn btn-danger">Imprimir</button>
+  </form>
+
   <br>
 
 

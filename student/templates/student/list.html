@@ -15,18 +15,14 @@
 {% block content %}
   <h1 class="text-center">Lista de Horas</h1>
   <br>
-  
-  {% for s in obj %}
-  <p>
-    {{s.id_app}} - {{s.name}} - {{s.surname}} - {{s.created_at}} -{{s.updated_at}}
-  </p>
-  {% endfor %}
+
 
   <h2>Lista de entrada y Salida</h2>
   <table class="table table-bordered">
     <thead>
       <tr>
-        <th scope="col">ID</th>
+        <th scope="col">id_asst</th>
+        <th scope="col">id_empleyo</th>
         <th scope="col">Nombres</th>
         <th scope="col">Apellidos</th>
         <th scope="col">Hora de Entrada</th>
@@ -36,19 +32,22 @@
       </tr>
     </thead>
     <tbody>
+
     {% for a in ass %}
       <tr>
         {% if a.exit_boolean == False %}
+        <td>{{a.id_ass}}</td>
         <td>{{a.apprentice.id_app}}</td>
         <td>{{a}}</td>
         <td>{{a.apprentice.surname}}</td>
         <td>{{a.entry_at|time:"H:i"}}</td>
-        <td>--:--</td>
+         <td>--:--</td>
         <td>{{tiempo}}</td>
         <td><button type="submit" class="btn btn-warning" onclick="window.location='{% url 'student:summary_assitance' a.apprentice.id_app a.entry_at%}'">Salida</button></td>
         {% endif %}
       </tr>
     {% endfor %}
+
     </tbody>
   </table>
 
