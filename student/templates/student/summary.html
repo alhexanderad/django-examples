@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static '' %}">
+{% endblock css %}
+  
+
+{% block scripts %}
+  <script src="{% static '' %}" defer></script>
+{% endblock scripts %}
+
+
+{% block title %}
+  {{title}}
+{% endblock title %}
+
+
+{% block content %}
+  <h1 class="text-center">{{title}}</h1>
+  <br>
+  {{ass_id.entry_boolean}}
+  {{ass_id.exit_boolean}}
+  <br>
+
+
+{% endblock content %}

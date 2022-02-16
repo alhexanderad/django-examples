@@ -1,3 +1,4 @@
+from typing import Any
 from django.urls import reverse
 from django.utils import timezone
 from django.http import HttpResponseRedirect, HttpResponse
@@ -6,7 +7,7 @@ from student.models import Apprentice, Assistance
 from datetime import datetime
 from student.forms import AssistanceForm
 from datetime import datetime, timedelta
-
+import time
 
 def list_apprentice(request):
   obj = Apprentice.objects.all()
@@ -102,29 +103,20 @@ def get_into(request):
 
   return render(request, 'student/get_into.html', context)
 
-def save_assitance(request):
+def summary_assitance(request,pk):
+#Una persona cuenta con un DNI, debe ser registrado su ingreso y salida.
 
-  forms = AssistanceForm(request.POST or None, request.FILES or None)
-  
-  if forms.is_valid():
-    instance = forms.save()
-
-  try:
-    app = Apprentice.objects.get(pk=10)
-    print("Si es socio del Club")
-
-  except Apprentice.DoesNotExist:
-    print("No se encuentra en el Club")
-  
-  now = time.strftime("%H:%M:%S")
-  print(now)
-
+#Se realiza la busqueda la ultima vez que ingreso y que todavia no se registro su salida  
+  test = Assistance.objects.filter(apprentice__id_app=pk, exit_boolean=False).last()
+  print(test.id_ass)
+  ass_id = Assistance.objects.get(pk=test.id_ass)
+  print(ass_id)
   context ={
-    'time' : now,
-    'title': 'Ingresar codigo de socio',
-    'forms': forms,
+    'ass_id':ass_id,
+    'title': 'Resumen',
+    'test':test,
     }
-  return render(request, 'student/save.html', context)
+  return render(request, 'student/summary.html', context)
 
 
 
