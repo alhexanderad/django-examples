@@ -8,30 +8,13 @@ from datetime import datetime
 
 
 def get_into(request):
-
-  en_test = datetime.timetuple(datetime.now())
-  
-  print(en_test)
-    
-  # if request.method == 'POST':
-  #   asst = request.POST['apprentice']
-  #   id_asst = Apprentice.objects.get(pk=asst)
-    
-  #   print(type(id_asst))
-  #   en = True
-  #   en_hour = timezone.localtime()
-  #   ex = False
-  #   ex_hour = timezone.localtime()
-    
-  #   print(en_hour)
-    
-  #   asst_save = Assistance(apprentice=id_asst , entry_boolean=en, entry_at=en_hour , exit_boolean=ex, exit_at=ex_hour)
-  #   asst_save.save()
-  
   if request.method == 'POST':
     asst = AssistanceForm(request.POST or None, request.FILES or None)
     id = request.POST['apprentice']
     id_asst = Apprentice.objects.get(pk=id)
+    if request.session.test_cookie_worked():
+      print("sfjsdfksñdfsdsjk")
+      request.session.delete_test_cookie()
     if asst.is_valid():
       data = asst.save(commit=False)
       data.apprentice = id_asst
